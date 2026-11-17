@@ -1,32 +1,77 @@
-# BiblioTauá — Livraria Web do IFCE Campus Tauá
+# BiblioTauá — Projeto Prático do Aluno (Sprint 04 - Aula 24)
+## TASK-204: Motor de Validação e Aplicação de Cupons de Desconto
 
-Sistema de livraria universitária desenvolvido na disciplina de **Engenharia de Software** do curso Técnico em Informática para Internet no **IFCE Campus Tauá**.
+Bem-vindo(a) à Sprint 04 do sistema **BiblioTauá Livraria Web**!
 
-## 📌 Visão Geral do Repositório
+Este repositório contém a base pré-existente (v0.3.0) da livraria universitária (`Cliente`, `Livro`, `ItemPedido`, `Pedido`, banco SQLite) e o esqueleto inicial das tarefas que você implementará na **Aula 24**.
 
-Este repositório contém o código-fonte base da versão estável **v0.3.0** e as branches dedicadas para cada encontro da **Sprint 04 (TASK-204: Motor de Validação e Aplicação de Cupons)**.
+---
 
-### 🌿 Branches Didáticas da Disciplina
+## 🌿 Fluxo Git & GitHub do Estudante
 
-- `main`: Versão base estável (v0.3.0) antes da Sprint 04.
-- `aula-24`: Ponto de partida da **Aula 24** (Modelagem UML e esqueleto inicial de `exceptions.py` e `models/cupom.py`).
-- `aula-25`: Ponto de partida da **Aula 25** (Persistência no SQLite e esqueleto de `repositories/cupom_repository.py`).
-- `aula-26`: Ponto de partida da **Aula 26** (Orquestração do checkout, serviços e integração em `models/pedido.py`).
-- `aula-27`: Ponto de partida da **Aula 27** (Garantia de Qualidade com Pytest e CLI interativo).
-
-## 🚀 Como Iniciar
-
-1. Faça um **Fork** deste repositório para o seu perfil no GitHub:
-   - Clique no botão **Fork** no topo direito da página do GitHub.
-   - Desmarque a opção *"Copy the main branch only"* para clonar todas as branches das aulas!
-2. Clone o seu fork na sua máquina local:
+1. **Repositório Oficial:** `https://github.com/reginaldo-pf/bibliotaua`
+2. **Fork:** Crie seu fork no GitHub desmarcando a opção *"Copy only the main branch"*.
+3. **Clonagem e Setup:**
    ```bash
    git clone https://github.com/<SEU-USUARIO>/bibliotaua.git
    cd bibliotaua
-   ```
-3. Configure o repositório original do professor como `upstream`:
-   ```bash
    git remote add upstream https://github.com/reginaldo-pf/bibliotaua.git
    git fetch upstream
+   git checkout -b feature/task-204-motor-cupons origin/aula-24
    ```
-4. Navegue até a branch da aula correspondente para iniciar o desenvolvimento da etapa!
+
+---
+
+## 🎯 Suas Tarefas Hoje
+
+1. **`bibliotaua/exceptions.py`:**
+   - Implementar as subclasses de exceção que herdam de `CupomInvalidoError` *(Slide 12)*:
+     - `CupomInexistenteError`
+     - `CupomInativoError`
+     - `CupomExpiradoError`
+     - `CupomEsgotadoError`
+     - `ValorMinimoNaoAtingidoError`
+
+2. **`bibliotaua/models/cupom.py`:**
+   - Implementar validações no método `__post_init__` *(Slide 13 e Guia do Desenvolvedor Passo 2.3)*.
+   - Implementar os métodos de domínio *(Slides 14 e 15 e Guia do Desenvolvedor Passos 2.4 a 2.9)*:
+     - `obter_data_validade()`
+     - `esta_expirado(data_referencia)`
+     - `atingiu_limite_usos()`
+     - `registrar_uso()`
+     - `pode_ser_aplicado_ao_pedido(subtotal, data_referencia)`
+     - `calcular_desconto(subtotal, data_referencia)`
+
+3. **`main.py`:**
+   - Criar ou completar o arquivo `main.py` na raiz do projeto para instanciar o cupom e testar o cálculo de desconto e o bloqueio de valor mínimo *(Slide 16 e Guia do Desenvolvedor Passo 3)*.
+
+---
+
+## 🚀 Como Executar
+
+No terminal, execute:
+
+```bash
+python3 main.py
+```
+
+**Saída esperada:**
+
+```text
+--- Testando a Entidade Cupom (BiblioTauá) ---
+Cupom: BEMVINDO10 (10.0% OFF)
+Subtotal R$ 100.00 -> Desconto: R$ 10.00
+Subtotal R$ 30.00  -> Bloqueado: O cupom 'BEMVINDO10' exige pedido mínimo de R$ 50.00. Subtotal atual: R$ 30.00.
+```
+
+---
+
+## 💾 Versionamento e Entrega no GitHub
+
+Após homologar a execução, envie o código para o seu repositório pessoal:
+
+```bash
+git add bibliotaua/exceptions.py bibliotaua/models/cupom.py main.py
+git commit -m "feat(domain): implementa excecoes e entidade Cupom (Aula 24)"
+git push -u origin feature/task-204-motor-cupons
+```

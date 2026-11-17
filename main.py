@@ -1,14 +1,21 @@
 """
-Ponto de entrada do sistema BiblioTauá Livraria Web (v0.3.0).
+Ponto de Entrada e Teste da Implementação - Aula 24
+Livraria BiblioTauá (Sprint 04 - TASK-204)
+
+Instruções para o Aluno:
+Após implementar bibliotaua/exceptions.py e bibliotaua/models/cupom.py,
+complete o código abaixo conforme apresentado no Slide 16 para testar o cupom.
 """
+from datetime import date, timedelta
+from bibliotaua.models.cupom import Cupom, TipoDesconto
+from bibliotaua.exceptions import ValorMinimoNaoAtingidoError
+
 def main():
-    print("=" * 60)
-    print("      BIBLIOTAUÁ — LIVRARIA WEB DO IFCE CAMPUS TAUÁ")
-    print("=" * 60)
-    print("Versão: v0.3.0 (Base estável da livraria universitária)")
-    print("Para iniciar a Sprint 04 (TASK-204), mude para a branch 'aula-24':")
-    print("  git checkout aula-24")
-    print("=" * 60)
+    print("--- Testando a Entidade Cupom (BiblioTauá) ---")
+
+    # TODO: [ALUNO] 1. Instancie o cupom 'BEMVINDO10' (10%, mínimo R$ 50.00, validade 5 dias)
+    # TODO: [ALUNO] 2. Teste o cálculo de desconto para subtotal de R$ 100.00
+    # TODO: [ALUNO] 3. Teste a regra de valor mínimo para subtotal de R$ 30.00 dentro de try/except
 
 if __name__ == "__main__":
     main()
